@@ -1,0 +1,351 @@
+/* ==========================================================================
+   tool-shell.css — 工具页视觉外壳（490 页通用）
+   定位：外观增强层。只改视觉，不改结构与功能，不触碰引擎 DOM。
+   依赖：main.css 的 CSS 变量（--card / --border / --primary / --foreground …）
+   约束：纯静态、离线、尊重 prefers-reduced-motion
+   ========================================================================== */
+
+:root {
+  --ts-radius: 22px;
+  --ts-shell-shadow: 0 1px 0 hsl(0 0% 100% / 0.07) inset,
+    0 26px 64px -34px hsl(var(--foreground) / 0.4);
+}
+
+/* ==========================================================================
+   1. 页面基座
+   ========================================================================== */
+.v-tool {
+  --ts-accent: hsl(var(--primary));
+}
+
+/* ==========================================================================
+   2. 头部：面包屑 + 顶行 + 大标题
+   ========================================================================== */
+
+/* 面包屑：等宽小字 + 分隔线质感 */
+.v-bcrumb {
+  font-family: var(--v-font-mono, ui-monospace, monospace);
+  font-size: 0.74rem !important;
+  letter-spacing: 0.04em;
+  color: hsl(var(--muted-foreground));
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.v-bcrumb a {
+  color: hsl(var(--muted-foreground));
+  text-decoration: none;
+  transition: color 240ms var(--v-ease-expo, cubic-bezier(0.19, 1, 0.22, 1));
+}
+
+.v-bcrumb a:hover {
+  color: hsl(var(--primary));
+}
+
+.v-bcrumb span[aria-current="page"] {
+  color: hsl(var(--foreground));
+  font-weight: 500;
+}
+
+/* 顶行：品牌 + 隐私承诺 */
+.v-topline {
+  display: flex !important;
+  align-items: center;
+  gap: 0.6rem 1.2rem;
+  flex-wrap: wrap;
+  font-size: 0.8rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.v-topline > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.v-topline svg {
+  color: hsl(var(--primary));
+  opacity: 0.9;
+}
+
+/* 大标题 */
+.v-tool-hero {
+  position: relative;
+  padding: clamp(1rem, 2.6vh, 2rem) 0 clamp(1.2rem, 3vh, 2.2rem) !important;
+}
+
+.v-tool-hero h1 {
+  font-size: clamp(2rem, 5.1vw, 3.9rem) !important;
+  font-weight: 800 !important;
+  line-height: 1.03 !important;
+  letter-spacing: -0.042em !important;
+  text-wrap: balance;
+  margin: 0.5em 0 0 !important;
+}
+
+/* 副标题：从 h1 内联 span 变成独立一行 */
+.v-tool-hero .vectorizer_heroSub__mDQMf {
+  display: block;
+  margin-top: 0.42em;
+  font-size: clamp(0.95rem, 1.5vw, 1.24rem) !important;
+  font-weight: 500 !important;
+  line-height: 1.4;
+  letter-spacing: -0.012em;
+  color: hsl(var(--muted-foreground));
+}
+
+/* 免费徽章 */
+.v-tool-hero .vectorizer_freeBadge__iYf8E {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.34rem 0.85rem !important;
+  border-radius: 999px !important;
+  border: 1px solid hsl(var(--primary) / 0.32) !important;
+  background: hsl(var(--primary) / 0.09) !important;
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.005em;
+  color: hsl(var(--primary));
+}
+
+/* 描述段 */
+.v-tool-hero > p {
+  font-size: var(--v-fs-lead, clamp(1rem, 1.3vw, 1.15rem));
+  line-height: 1.68;
+  color: hsl(var(--muted-foreground));
+  max-width: 62ch;
+  margin-top: 1rem !important;
+  text-wrap: pretty;
+}
+
+/* 承诺条 / 能力列表 */
+.v-promises {
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.6rem;
+  margin-top: 1.1rem !important;
+}
+
+.v-promises > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 8px;
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--card) / 0.6);
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.v-benefits {
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.1rem;
+  margin-top: 0.8rem !important;
+  font-size: 0.82rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.v-benefits > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38rem;
+}
+
+.v-benefits svg {
+  color: hsl(var(--primary));
+  flex: none;
+}
+
+/* ==========================================================================
+   3. 工作台：把引擎容器包进一个「仪器面板」外壳
+   ========================================================================== */
+.v-shell {
+  position: relative;
+  isolation: isolate;
+  border-radius: var(--ts-radius) !important;
+  border: 1px solid hsl(var(--border)) !important;
+  background: linear-gradient(
+      180deg,
+      hsl(var(--primary) / 0.055),
+      transparent 34%
+    ),
+    hsl(var(--card)) !important;
+  box-shadow: var(--ts-shell-shadow) !important;
+  transition: border-color 380ms var(--v-ease-expo, cubic-bezier(0.19, 1, 0.22, 1)),
+    box-shadow 380ms var(--v-ease-expo, cubic-bezier(0.19, 1, 0.22, 1));
+}
+
+.v-shell:hover {
+  border-color: hsl(var(--primary) / 0.38) !important;
+  box-shadow: 0 1px 0 hsl(0 0% 100% / 0.08) inset,
+    0 30px 72px -34px hsl(var(--primary) / 0.45) !important;
+}
+
+/* 顶边高光：一条从左向右衰减的细线 */
+.v-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: var(--ts-radius) var(--ts-radius) 0 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    hsl(var(--primary) / 0.55) 22%,
+    hsl(var(--primary) / 0.55) 78%,
+    transparent
+  );
+}
+
+/* 内部网格纹理：极淡，制造「仪器」精密感 */
+.v-shell::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: var(--ts-radius);
+  opacity: 0.5;
+  background-image: linear-gradient(
+      hsl(var(--foreground) / 0.028) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, hsl(var(--foreground) / 0.028) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 90% 80% at 50% 0%, #000 10%, transparent 72%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 0%, #000 10%, transparent 72%);
+}
+
+/* 引擎内部所有直接子层抬到网格之上 */
+.v-shell > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* 工作台下方那句隐私说明 */
+.v-under {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  font-size: 0.8rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.v-under svg {
+  color: hsl(var(--primary));
+  flex: none;
+}
+
+/* ==========================================================================
+   4. 分区标题：编号 + 细线
+   ========================================================================== */
+main.v-num {
+  counter-reset: vsec;
+}
+
+.v-sec-head h2 {
+  counter-increment: vsec;
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+
+.v-sec-head h2::before {
+  content: counter(vsec, decimal-leading-zero);
+  font-family: var(--v-font-mono, ui-monospace, monospace);
+  font-size: 0.62em;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  color: hsl(var(--primary));
+  opacity: 0.85;
+  flex: none;
+}
+
+.v-sec-head {
+  border-bottom: 1px solid hsl(var(--border));
+  padding-bottom: 0.6rem !important;
+  margin-bottom: 1rem !important;
+}
+
+/* ==========================================================================
+   5. 底部行动区
+   ========================================================================== */
+.v-cta {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--ts-radius) !important;
+  border: 1px solid hsl(var(--border)) !important;
+  background: linear-gradient(
+      128deg,
+      hsl(var(--primary) / 0.14),
+      hsl(var(--primary) / 0.03) 46%,
+      transparent
+    ),
+    hsl(var(--card)) !important;
+  padding: clamp(1.4rem, 3.4vw, 2.4rem) !important;
+}
+
+.v-cta h2 {
+  font-size: clamp(1.3rem, 3vw, 2rem) !important;
+  font-weight: 750 !important;
+  line-height: 1.12 !important;
+  letter-spacing: -0.035em !important;
+  text-wrap: balance;
+}
+
+.v-cta p {
+  color: hsl(var(--muted-foreground));
+  margin-top: 0.5rem !important;
+  font-size: 0.94rem;
+}
+
+/* ==========================================================================
+   6. 相关工具卡片
+   ========================================================================== */
+.v-rel {
+  border-radius: 13px !important;
+  border: 1px solid hsl(var(--border)) !important;
+  background: hsl(var(--card)) !important;
+  transition: transform 320ms var(--v-ease-spring, cubic-bezier(0.16, 1, 0.3, 1)),
+    border-color 320ms var(--v-ease-expo, cubic-bezier(0.19, 1, 0.22, 1)),
+    background 320ms var(--v-ease-expo, cubic-bezier(0.19, 1, 0.22, 1));
+}
+
+.v-rel:hover {
+  transform: translateY(-2px);
+  border-color: hsl(var(--primary) / 0.45) !important;
+  background: hsl(var(--primary) / 0.045) !important;
+}
+
+/* ==========================================================================
+   7. 移动端收敛
+   ========================================================================== */
+@media (max-width: 767px) {
+  :root {
+    --ts-radius: 16px;
+  }
+  .v-tool-hero h1 {
+    font-size: clamp(1.7rem, 8.4vw, 2.5rem) !important;
+  }
+}
+
+/* ==========================================================================
+   8. 降级
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .v-shell,
+  .v-rel {
+    transition: none !important;
+  }
+  .v-rel:hover {
+    transform: none !important;
+  }
+}
