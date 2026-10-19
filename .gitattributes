@@ -1,0 +1,38 @@
+# 换行符策略：跨平台项目的关键，缺了这个 Mac 上 .command 会报「坏的解释器」
+
+# Unix 脚本必须永远 LF
+*.command text eol=lf
+*.sh      text eol=lf
+*.py      text eol=lf
+*.rb      text eol=lf
+
+# Windows 脚本用 CRLF
+*.bat     text eol=crlf
+*.ps1     text eol=crlf
+*.cmd     text eol=crlf
+
+# 源码与资源
+*.html    text eol=lf
+*.css     text eol=lf
+*.js      text eol=lf
+*.mjs     text eol=lf
+*.json    text eol=lf
+*.md      text eol=lf
+*.txt     text eol=crlf
+*.xml     text eol=lf
+*.svg     text eol=lf
+
+# 二进制，禁止任何转换
+*.wasm    binary
+*.png     binary
+*.jpg     binary
+*.jpeg    binary
+*.webp    binary
+*.gif     binary
+*.ico     binary
+*.woff    binary
+*.woff2   binary
+*.ttf     binary
+*.eot     binary
+*.zip     binary
+*.glb     binary

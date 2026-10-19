@@ -1,0 +1,30 @@
+# macOS 垃圾
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+__MACOSX/
+
+# Windows 垃圾
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# 编辑器 / 系统
+.vscode/
+.idea/
+*.swp
+*~
+
+# 本地运行时产物（不要提交）
+*.log
+.runtime/
+node_modules/
+.env
+.env.local

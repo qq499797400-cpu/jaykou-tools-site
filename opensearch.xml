@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+  <ShortName>嘉Jaykou工具台</ShortName>
+  <LongName>嘉Jaykou工具台 — 490 个免费在线工具</LongName>
+  <Description>搜索站内 490 个免费在线工具：PDF、图片、视频、音频、文本、计算器</Description>
+  <InputEncoding>UTF-8</InputEncoding>
+  <OutputEncoding>UTF-8</OutputEncoding>
+  <Language>zh-CN</Language>
+  <Image width="16" height="16" type="image/x-icon">assets/media/favicon.ico</Image>
+  <Image width="192" height="192" type="image/png">assets/media/web-app-manifest-192x192.png</Image>
+  <Url type="text/html" method="get" template="./index.html?q={searchTerms}"/>
+  <Url type="application/opensearchdescription+xml" rel="self" template="./opensearch.xml"/>
+  <Query role="example" searchTerms="压缩 pdf"/>
+</OpenSearchDescription>

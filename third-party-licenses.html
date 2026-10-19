@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第三方开源许可 — 嘉Jaykou工具台</title>
+<meta name="description" content="嘉Jaykou工具台 所用第三方开源组件与模型的许可协议一览。">
+<link rel="icon" href="assets/media/favicon.ico">
+<link rel="stylesheet" href="assets/main.css">
+<link rel="stylesheet" href="assets/theme-glass.css">
+<style>
+  body{max-width:860px;margin:0 auto;padding:32px 20px 80px;line-height:1.75}
+  h1{font-size:30px;margin:0 0 8px;letter-spacing:-.02em}
+  h2{font-size:19px;margin:34px 0 10px;padding-bottom:8px;border-bottom:1px solid rgba(124,92,255,.18)}
+  .lead{color:var(--jk-mute,#6b6480);margin:0 0 4px}
+  .lic{border:1px solid rgba(124,92,255,.16);border-radius:16px;padding:16px 18px;margin-bottom:12px;background:rgba(255,255,255,.58);backdrop-filter:blur(14px)}
+  .lic h3{margin:0 0 4px;font-size:15.5px}
+  .lic p{margin:0;font-size:14px;color:var(--jk-mute,#6b6480)}
+  .tag{display:inline-block;font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;background:rgba(124,92,255,.12);color:#6a4fe0;margin-left:8px;vertical-align:2px}
+  .back{display:inline-block;margin-top:26px;color:#6a4fe0;font-weight:600;text-decoration:none}
+  .back:hover{text-decoration:underline}
+  code{background:rgba(124,92,255,.1);padding:1px 6px;border-radius:6px;font-size:13px}
+</style>
+<link rel="stylesheet" href="assets/assistant.css"></head>
+<body>
+
+<h1>第三方开源许可</h1>
+<p class="lead">本站 490 个工具大部分在你自己的浏览器里运行，用到了下列开源组件与模型。感谢这些项目的作者。</p>
+
+<h2>文档与压缩包处理</h2>
+<div class="lic"><h3>pdf-lib<span class="tag">MIT</span></h3><p>用于 PDF 合并、拆分、旋转、页码、水印等页面。</p></div>
+<div class="lic"><h3>PDF.js (pdfjs-dist)<span class="tag">Apache-2.0</span></h3><p>用于 PDF 渲染预览与 PDF 转图片。</p></div>
+<div class="lic"><h3>JSZip<span class="tag">MIT / GPLv3 双许可</span></h3><p>用于批量结果的 ZIP 打包下载。</p></div>
+<div class="lic"><h3>SheetJS<span class="tag">Apache-2.0</span></h3><p>用于 Excel / CSV 的读写与格式转换。</p></div>
+
+<h2>图片与视频</h2>
+<div class="lic"><h3>FFmpeg（ffmpeg.wasm）<span class="tag">LGPL-3.0</span></h3><p>用于视频转码、压缩、裁剪、抽帧、GIF 转换等音视频工具。</p></div>
+<div class="lic"><h3>libheif / heic-decode<span class="tag">LGPL-3.0</span></h3><p>用于 HEIC / HEIF 图片解码。</p></div>
+<div class="lic"><h3>sharp / libvips（构建期）<span class="tag">Apache-2.0 / LGPL-3.0</span></h3><p>部分图片处理管线使用的底层图像库。</p></div>
+<div class="lic"><h3>gif.js / gifenc<span class="tag">MIT</span></h3><p>用于 GIF 动图的编码与生成。</p></div>
+
+<h2>AI 与模型</h2>
+<div class="lic"><h3>Depth Anything V2 Small<span class="tag">Apache-2.0</span></h3><p>用于 3D 照片、深度图生成等工具的单目深度估计模型。</p></div>
+<div class="lic"><h3>ONNX Runtime Web<span class="tag">MIT</span></h3><p>模型在浏览器内的推理运行时。</p></div>
+<div class="lic"><h3>u2net / rembg 权重<span class="tag">Apache-2.0</span></h3><p>用于图片去背景（抠图）。</p></div>
+<div class="lic"><h3>Real-ESRGAN<span class="tag">BSD-3-Clause</span></h3><p>用于图片放大与画质增强。</p></div>
+
+<h2>字体与图标</h2>
+<div class="lic"><h3>Inter / Noto Sans SC<span class="tag">OFL-1.1</span></h3><p>界面与正文的中英文字体。</p></div>
+<div class="lic"><h3>Lucide Icons<span class="tag">ISC</span></h3><p>站内所有线性图标。</p></div>
+
+<h2>其他</h2>
+<div class="lic"><h3>Chart.js<span class="tag">MIT</span></h3><p>用于图表与数据可视化工具。</p></div>
+<div class="lic"><h3>CodeMirror<span class="tag">MIT</span></h3><p>用于代码编辑、格式化与高亮。</p></div>
+<div class="lic"><h3>Tesseract.js<span class="tag">Apache-2.0</span></h3><p>用于图片文字识别（OCR）。</p></div>
+
+<p class="lead" style="margin-top:28px">
+  如果你认为本站对某个组件的使用需要补充署名或调整，欢迎联系我们修正。
+  所有工具均在浏览器本地运行，你的文件不会上传到服务器。
+</p>
+
+<a class="back" href="index.html">← 返回工具首页</a>
+
+<script src="assets/tools-index.js" defer></script>
+<script src="assets/assistant.js" defer></script>
+<script src="assets/samples.js" defer></script>
+</body>
+</html>

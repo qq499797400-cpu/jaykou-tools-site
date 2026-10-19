@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://qq499797400-cpu.github.io/jaykou-tools-site/sitemap.xml
