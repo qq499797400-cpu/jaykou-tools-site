@@ -1,0 +1,721 @@
+/* ==========================================================================
+   vision.css — 嘉Jaykou工具台 视觉层
+   设计目标：Awwwards / FWA 级别的排版张力与物理动效
+   约束：纯静态、离线可用、不引入任何外链资源、尊重系统 prefers-reduced-motion
+   这套样式是「增强层」：叠加在原有 main.css 之上，不改动任何结构与功能
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. 设计令牌
+   -------------------------------------------------------------------------- */
+:root {
+  /* 流体排版：中文用系统黑体，拉丁/数字用 Azeret 做出实验感 */
+  --v-font-display: "Azeret", "GeistSans", -apple-system, BlinkMacSystemFont,
+    "PingFang SC", "Microsoft YaHei", sans-serif;
+  --v-font-body: var(--font-geist-sans), -apple-system, BlinkMacSystemFont,
+    "PingFang SC", "Microsoft YaHei", sans-serif;
+  --v-font-mono: "GeistMono", "Google Sans Code", ui-monospace, SFMono-Regular,
+    Menlo, monospace;
+
+  /* 字号阶梯 */
+  --v-fs-mega: clamp(5rem, 19vw, 17rem);
+  --v-fs-h1: clamp(2.1rem, 5.6vw, 4.6rem);
+  --v-fs-h2: clamp(1.35rem, 2.6vw, 2.1rem);
+  --v-fs-lead: clamp(1rem, 1.35vw, 1.3rem);
+  --v-fs-micro: clamp(0.66rem, 0.8vw, 0.76rem);
+
+  /* 物理动效曲线 */
+  --v-ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --v-ease-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --v-ease-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --v-dur-fast: 260ms;
+  --v-dur-base: 520ms;
+  --v-dur-slow: 900ms;
+
+  /* 画布层 */
+  --v-grid-line: hsl(var(--foreground) / 0.055);
+  --v-glow-a: hsl(var(--primary) / 0.5);
+  --v-glow-b: hsl(calc(var(--primary-h, 221) + 60) 90% 60% / 0.35);
+  --v-noise: 0.032;
+
+  /* 层级 */
+  --v-z-canvas: 0;
+  --v-z-content: 1;
+}
+
+/* 深色主题下光晕更浓、网格更亮 */
+.dark {
+  --v-grid-line: hsl(0 0% 100% / 0.07);
+  --v-glow-a: hsl(var(--primary) / 0.62);
+  --v-noise: 0.05;
+}
+
+/* --------------------------------------------------------------------------
+   2. 全局基底
+   -------------------------------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--v-font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1, "liga" 1, "cv11" 1;
+}
+
+/* 选择态：品牌色而非浏览器默认蓝 */
+::selection {
+  background: hsl(var(--primary) / 0.24);
+  color: hsl(var(--foreground));
+}
+
+/* 焦点环：只在键盘导航时出现，鼠标点击不打扰 */
+:focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   3. 画布：网格 + 噪点 + 光晕
+   任何元素加 .v-canvas 即可获得这三层背景
+   -------------------------------------------------------------------------- */
+.v-canvas {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.v-canvas::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  z-index: var(--v-z-canvas);
+  pointer-events: none;
+  background-image: linear-gradient(var(--v-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--v-grid-line) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 20%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 20%, transparent 78%);
+}
+
+/* 噪点：内联 SVG，零请求、离线可用 */
+.v-canvas::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: var(--v-z-canvas);
+  pointer-events: none;
+  opacity: var(--v-noise);
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* 光晕：跟随鼠标的柔光，位置由 vision.js 写入 --v-mx / --v-my */
+.v-glow {
+  position: absolute;
+  z-index: var(--v-z-canvas);
+  pointer-events: none;
+  left: var(--v-mx, 50%);
+  top: var(--v-my, 0%);
+  width: min(78vw, 900px);
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--v-glow-a) 0%, transparent 62%);
+  filter: blur(48px);
+  opacity: 0.72;
+  transition: opacity var(--v-dur-base) var(--v-ease-expo);
+}
+
+.v-glow--b {
+  background: radial-gradient(circle, var(--v-glow-b) 0%, transparent 66%);
+  filter: blur(72px);
+  width: min(92vw, 1100px);
+  opacity: 0.5;
+}
+
+/* --------------------------------------------------------------------------
+   4. 排版：实验性大字
+   -------------------------------------------------------------------------- */
+.v-mega {
+  font-family: var(--v-font-display);
+  font-size: var(--v-fs-mega);
+  font-weight: 800;
+  line-height: 0.78;
+  letter-spacing: -0.06em;
+  font-variant-numeric: tabular-nums;
+  display: block;
+  background: linear-gradient(
+    168deg,
+    hsl(var(--foreground)) 8%,
+    hsl(var(--foreground) / 0.62) 52%,
+    hsl(var(--primary)) 108%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* 描边空心字：与实心数字错位叠放，制造版式纵深 */
+.v-hero__lockup {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(0.5rem, 2vw, 1.6rem);
+}
+
+.v-mega-outline {
+  font-family: var(--v-font-display);
+  font-size: calc(var(--v-fs-mega) * 0.5);
+  font-weight: 800;
+  line-height: 0.8;
+  letter-spacing: -0.03em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px hsl(var(--foreground) / 0.26);
+  user-select: none;
+  transform: translateY(-0.08em);
+}
+
+/* 旋转圆环徽章 */
+.v-orbit {
+  position: relative;
+  width: clamp(108px, 11vw, 150px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+}
+
+.v-orbit__ring {
+  position: absolute;
+  inset: 0;
+  animation: v-spin 14s linear infinite;
+}
+
+.v-orbit__ring text {
+  font-family: var(--v-font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.32em;
+  fill: hsl(var(--muted-foreground));
+  text-transform: uppercase;
+}
+
+.v-orbit__ic {
+  display: grid;
+  place-items: center;
+  width: 44%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  color: hsl(var(--primary));
+  box-shadow: 0 10px 30px -14px hsl(var(--primary) / 0.55);
+}
+
+.v-orbit__ic svg {
+  width: 38%;
+  height: 38%;
+}
+
+@keyframes v-spin {
+  to { transform: rotate(360deg); }
+}
+
+.v-hero__side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.4rem;
+}
+
+.v-h1 {
+  font-size: var(--v-fs-h1);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.v-lead {
+  font-size: var(--v-fs-lead);
+  line-height: 1.62;
+  color: hsl(var(--muted-foreground));
+  max-width: 46ch;
+  text-wrap: pretty;
+}
+
+/* 竖排小标签：给中文标题加一个垂直的英文注记，制造排版层次 */
+.v-vertical-tag {
+  writing-mode: vertical-rl;
+  font-family: var(--v-font-mono);
+  font-size: var(--v-fs-micro);
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: hsl(var(--muted-foreground));
+  opacity: 0.72;
+}
+
+/* 编号标记：分类前的 01 / 02 */
+.v-index {
+  font-family: var(--v-font-mono);
+  font-size: var(--v-fs-micro);
+  letter-spacing: 0.22em;
+  color: hsl(var(--primary));
+  font-variant-numeric: tabular-nums;
+}
+
+/* --------------------------------------------------------------------------
+   5. 入场动效（vision.js 负责加 is-in）
+   -------------------------------------------------------------------------- */
+.v-reveal {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+  transition: opacity var(--v-dur-slow) var(--v-ease-expo),
+    transform var(--v-dur-slow) var(--v-ease-spring);
+  transition-delay: var(--v-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.v-reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* 逐字入场：每个字符由 vision.js 包进 <span class="v-char"> */
+.v-split .v-char {
+  display: inline-block;
+  opacity: 0;
+  transform: translate3d(0, 0.72em, 0) rotate(4deg);
+  transition: opacity 620ms var(--v-ease-expo),
+    transform 780ms var(--v-ease-spring);
+  transition-delay: calc(var(--v-i, 0) * 34ms + var(--v-delay, 0ms));
+  will-change: opacity, transform;
+}
+
+.v-split.is-in .v-char {
+  opacity: 1;
+  transform: none;
+}
+
+/* 词级入场，用于长句 */
+.v-split-w .v-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translate3d(0, 0.42em, 0);
+  transition: opacity 520ms var(--v-ease-expo),
+    transform 620ms var(--v-ease-spring);
+  transition-delay: calc(var(--v-i, 0) * 26ms + var(--v-delay, 0ms));
+}
+
+.v-split-w.is-in .v-word {
+  opacity: 1;
+  transform: none;
+}
+
+/* --------------------------------------------------------------------------
+   6. 磁吸与物理反馈
+   -------------------------------------------------------------------------- */
+.v-magnetic {
+  transition: transform 420ms var(--v-ease-spring),
+    box-shadow 420ms var(--v-ease-expo);
+  will-change: transform;
+}
+
+.v-magnetic:hover {
+  box-shadow: 0 18px 48px -20px hsl(var(--foreground) / 0.28);
+}
+
+/* 卡片：3D 倾斜由 JS 写入 --v-rx / --v-ry */
+.v-tilt {
+  transform: perspective(760px) rotateX(var(--v-rx, 0deg)) rotateY(var(--v-ry, 0deg))
+    translate3d(0, var(--v-lift, 0px), 0);
+  transform-style: preserve-3d;
+  transition: transform 320ms var(--v-ease-spring),
+    box-shadow 320ms var(--v-ease-expo),
+    border-color 320ms var(--v-ease-expo);
+}
+
+.v-tilt:hover {
+  border-color: hsl(var(--primary) / 0.5);
+  box-shadow: 0 22px 54px -24px hsl(var(--primary) / 0.42);
+}
+
+/* 边框流光：hover 时一道光沿边框扫过 */
+.v-sheen {
+  position: relative;
+  overflow: hidden;
+}
+
+.v-sheen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    transparent 32%,
+    hsl(var(--foreground) / 0.11) 48%,
+    transparent 64%
+  );
+  translate: -120% 0;
+  transition: translate 900ms var(--v-ease-expo);
+}
+
+.v-sheen:hover::after {
+  translate: 120% 0;
+}
+
+/* --------------------------------------------------------------------------
+   7. 首屏 Hero
+   -------------------------------------------------------------------------- */
+.v-hero {
+  position: relative;
+  padding: clamp(3.4rem, 9vh, 7.5rem) 0 clamp(2.6rem, 6vh, 5rem);
+  min-height: min(88vh, 860px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.v-hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: clamp(1.2rem, 3vw, 3rem);
+  align-items: end;
+}
+
+.v-hero__title {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
+}
+
+.v-hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 1.1rem;
+  margin-top: clamp(1.4rem, 3vh, 2.4rem);
+}
+
+/* 徽章：胶囊 + 呼吸光点 */
+.v-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.42rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--card) / 0.72);
+  backdrop-filter: blur(12px);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.v-badge__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: hsl(var(--primary));
+  box-shadow: 0 0 0 0 hsl(var(--primary) / 0.55);
+  animation: v-pulse 2.6s var(--v-ease-expo) infinite;
+}
+
+@keyframes v-pulse {
+  0% { box-shadow: 0 0 0 0 hsl(var(--primary) / 0.5); }
+  70% { box-shadow: 0 0 0 9px hsl(var(--primary) / 0); }
+  100% { box-shadow: 0 0 0 0 hsl(var(--primary) / 0); }
+}
+
+/* 指标组：490 / 17 / 0 这类数字 */
+.v-stats {
+  display: flex;
+  gap: clamp(1.4rem, 4vw, 3.4rem);
+  margin-top: clamp(1.6rem, 4vh, 2.8rem);
+  flex-wrap: wrap;
+}
+
+.v-stat__num {
+  font-family: var(--v-font-display);
+  font-size: clamp(1.5rem, 3.1vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  display: block;
+}
+
+.v-stat__label {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  color: hsl(var(--muted-foreground));
+}
+
+/* 滚动提示 */
+.v-scroll-cue {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: auto;
+  padding-top: clamp(1.6rem, 4vh, 3rem);
+  font-family: var(--v-font-mono);
+  font-size: var(--v-fs-micro);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: hsl(var(--muted-foreground));
+}
+
+.v-scroll-cue__line {
+  display: block;
+  width: 46px;
+  height: 1px;
+  background: hsl(var(--border));
+  position: relative;
+  overflow: hidden;
+}
+
+.v-scroll-cue__line::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: hsl(var(--primary));
+  animation: v-sweep 2.4s var(--v-ease-expo) infinite;
+}
+
+@keyframes v-sweep {
+  0% { transform: translateX(-100%); }
+  60%, 100% { transform: translateX(100%); }
+}
+
+/* --------------------------------------------------------------------------
+   8. 分类区块
+   -------------------------------------------------------------------------- */
+.v-section {
+  scroll-margin-top: 5.5rem;
+}
+
+.v-section__head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+  margin-bottom: 1.1rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid hsl(var(--border));
+}
+
+.v-section__title {
+  font-size: var(--v-fs-h2);
+  font-weight: 650;
+  letter-spacing: -0.028em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* 分类图标容器：给 Lucide 图标一个统一的品牌底 */
+.v-ic {
+  display: inline-grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  background: linear-gradient(140deg, var(--c1, hsl(var(--primary) / 0.9)), var(--c2, hsl(var(--primary))));
+  color: #fff;
+  flex: none;
+  box-shadow: 0 6px 18px -8px var(--c2, hsl(var(--primary) / 0.6));
+}
+
+.v-ic svg {
+  width: 17px;
+  height: 17px;
+}
+
+.v-count {
+  font-family: var(--v-font-mono);
+  font-size: 0.78rem;
+  color: hsl(var(--muted-foreground));
+  font-variant-numeric: tabular-nums;
+}
+
+/* 工具卡片网格：密度更高、圆角更小、hover 有物理感 */
+.v-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(196px, 1fr));
+  gap: 0.7rem;
+}
+
+.v-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.7rem 0.85rem;
+  border-radius: 11px;
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--card));
+  color: inherit;
+  text-decoration: none;
+  overflow: hidden;
+  transition: transform 320ms var(--v-ease-spring),
+    border-color 320ms var(--v-ease-expo),
+    background 320ms var(--v-ease-expo);
+}
+
+.v-card:hover {
+  transform: translateY(-2px);
+  border-color: hsl(var(--primary) / 0.45);
+  background: hsl(var(--primary) / 0.045);
+}
+
+.v-card__ic {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  background: hsl(var(--foreground) / 0.055);
+  color: hsl(var(--foreground) / 0.72);
+  flex: none;
+  transition: background 320ms var(--v-ease-expo), color 320ms var(--v-ease-expo);
+}
+
+.v-card:hover .v-card__ic {
+  background: hsl(var(--primary));
+  color: #fff;
+}
+
+.v-card__ic svg {
+  width: 14px;
+  height: 14px;
+}
+
+.v-card__name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: -0.012em;
+  line-height: 1.25;
+}
+
+.v-card__desc {
+  font-size: 0.72rem;
+  color: hsl(var(--muted-foreground));
+  line-height: 1.35;
+  margin-top: 0.1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* 卡片内的箭头：hover 时滑入 */
+.v-card__arrow {
+  margin-left: auto;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 320ms var(--v-ease-expo), transform 320ms var(--v-ease-spring);
+  color: hsl(var(--primary));
+  flex: none;
+}
+
+.v-card:hover .v-card__arrow {
+  opacity: 1;
+  transform: none;
+}
+
+/* --------------------------------------------------------------------------
+   9. 光标跟随光晕（桌面端）
+   -------------------------------------------------------------------------- */
+.v-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 60;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  pointer-events: none;
+  translate: -50% -50%;
+  background: radial-gradient(circle, hsl(var(--primary) / 0.13), transparent 66%);
+  filter: blur(20px);
+  opacity: 0;
+  transition: opacity 420ms var(--v-ease-expo);
+  mix-blend-mode: normal;
+}
+
+.v-cursor.is-on {
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   10. 降级：尊重系统减少动效设置
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .v-reveal,
+  .v-split .v-char,
+  .v-split-w .v-word {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .v-tilt {
+    transform: none !important;
+  }
+  .v-badge__dot,
+  .v-scroll-cue__line::after,
+  .v-orbit__ring {
+    animation: none !important;
+  }
+  .v-cursor,
+  .v-glow {
+    display: none;
+  }
+  .v-sheen::after {
+    display: none;
+  }
+}
+
+/* 触屏设备不做磁吸与倾斜，避免粘滞感 */
+@media (hover: none) {
+  .v-tilt {
+    transform: none !important;
+  }
+  .v-cursor {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   11. 移动端收敛
+   -------------------------------------------------------------------------- */
+@media (max-width: 767px) {
+  :root {
+    --v-fs-mega: clamp(4rem, 26vw, 8rem);
+  }
+  .v-hero {
+    min-height: auto;
+  }
+  .v-hero__grid {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+  .v-vertical-tag {
+    display: none;
+  }
+  .v-grid {
+    grid-template-columns: repeat(auto-fill, minmax(158px, 1fr));
+  }
+  .v-stats {
+    gap: 1.2rem 1.8rem;
+  }
+}
