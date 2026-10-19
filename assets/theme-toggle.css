@@ -1,0 +1,183 @@
+/* ==========================================================================
+   theme-toggle.css — 深色 / 浅色主题切换按钮
+   站点 main.css 已内置 518 条 .dark 变体规则，这里只补「切换入口」的样式，
+   以及主题切换时的平滑过渡。零外链、零依赖。
+   ========================================================================== */
+
+.v-theme-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex: none;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background: var(--header-control-bg, hsl(var(--muted) / 0.5));
+  color: var(--header-muted-color, hsl(var(--muted-foreground)));
+  cursor: pointer;
+  transition: background 240ms cubic-bezier(0.19, 1, 0.22, 1),
+    color 240ms cubic-bezier(0.19, 1, 0.22, 1),
+    transform 320ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.v-theme-btn:hover {
+  background: var(--header-control-hover-bg, hsl(var(--muted) / 0.8));
+  color: var(--header-logo-color, hsl(var(--foreground)));
+  transform: translateY(-1px);
+}
+
+.v-theme-btn:active {
+  transform: scale(0.94);
+}
+
+.v-theme-ic {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  transition: opacity 320ms cubic-bezier(0.19, 1, 0.22, 1),
+    transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 浅色：显示月亮（点了变深色） */
+.v-theme-ic--moon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+.v-theme-ic--sun {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.4);
+}
+
+/* 深色：显示太阳（点了变浅色） */
+.dark .v-theme-ic--moon {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.4);
+}
+
+.dark .v-theme-ic--sun {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+/* ---------- 积分条停靠 ----------
+   credits.js 运行时注入的 #jk-bar 是 fixed 定位，设计上压在原本 36px 高的
+   公告条右侧。公告条移除后 header 变矮，它会覆盖导航右侧按钮导致点不动，
+   所以由 JS 把它移入 header 的右侧操作区，这里补停靠后的对齐。 */
+header.ws-header .jk-bar {
+  position: static !important;
+  top: auto !important;
+  right: auto !important;
+  margin-right: 2px;
+  white-space: nowrap;
+}
+
+/* ---------- 深色主题变量（提权覆盖）----------
+   缺陷根因：main.css 里 `.dark{--background:0 0% 9%…}` 定义在先，
+   其后又有一个 `:root{--background:258 100% 99%…}`（品牌浅紫底）。
+   两者权重同为 (0,1,0)，后定义的 :root 胜出 —— 于是即便挂上 .dark，
+   底纹也不会变，深色模式长期失效。
+   这里改用 html.dark（权重 0,1,1）压过它，让内置的 518 条 .dark 规则真正生效。 */
+html.dark {
+  --background: 0 0% 9%;
+  --foreground: 0 0% 100%;
+  --card: 0 0% 15%;
+  --card-foreground: 0 0% 98%;
+  --popover: 0 0% 15%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 221.284 91% 53%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 0% 14.9%;
+  --secondary-foreground: 214.286 32% 91%;
+  --muted: 0 0% 20%;
+  --muted-foreground: 215 20% 65%;
+  --accent: 0 0% 22%;
+  --accent-foreground: 212.727 27% 84%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 25%;
+  --input: 0 0% 25%;
+  --ring: 212.727 27% 84%;
+  --chart-1: 220 70% 50%;
+  --chart-2: 160 60% 45%;
+  --chart-3: 30 80% 55%;
+  --chart-4: 280 65% 60%;
+  --chart-5: 340 75% 55%;
+  --disabled: 217.241 33% 18%;
+  --accent-light: #1e1b4b;
+  --surface: #18181b;
+  color-scheme: dark;
+}
+
+/* 深色下画布与光晕的观感微调 */
+html.dark .v-canvas::after {
+  opacity: 0.055;
+}
+
+/* ---------- 背景图层：深色氛围 ----------
+   body 原本铺了多层 radial-gradient（品牌浅紫），它绘制在 background-color
+   之上，所以只切变量是不够的 —— 必须一并换掉背景图层，否则深色下仍是浅紫底。 */
+html.dark body {
+  background-image: radial-gradient(
+      1100px 640px at 6% -10%,
+      rgba(124, 92, 255, 0.26),
+      rgba(124, 92, 255, 0) 62%
+    ),
+    radial-gradient(
+      920px 520px at 96% 4%,
+      rgba(188, 249, 12, 0.08),
+      rgba(188, 249, 12, 0) 60%
+    ) !important;
+  background-color: hsl(0 0% 9%) !important;
+  color: hsl(0 0% 100%) !important;
+}
+
+/* 深色下常见硬编码浅底容器（卡片/面板/代码块）收敛 */
+html.dark .bg-white,
+html.dark .bg-\[\#f4f2ec\],
+html.dark .bg-\[\#f5f5f7\] {
+  background-color: hsl(0 0% 13%) !important;
+}
+
+/* ---------- 主题切换时的平滑过渡 ---------- */
+html.jk-theme-anim,
+html.jk-theme-anim body,
+html.jk-theme-anim header,
+html.jk-theme-anim main,
+html.jk-theme-anim footer,
+html.jk-theme-anim section {
+  transition: background-color 320ms ease, color 320ms ease,
+    border-color 320ms ease;
+}
+
+/* ---------- 图标与徽章在深色下的可读性 ---------- */
+.dark .v-glow {
+  opacity: 0.85;
+}
+
+.dark .v-shell {
+  border-color: hsl(0 0% 100% / 0.1) !important;
+}
+
+.dark .v-card:hover,
+.dark .v-rel:hover {
+  background: hsl(var(--primary) / 0.1) !important;
+}
+
+/* ---------- 降级：不做动画 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .v-theme-btn,
+  .v-theme-ic {
+    transition: none !important;
+  }
+  html.jk-theme-anim,
+  html.jk-theme-anim body,
+  html.jk-theme-anim header,
+  html.jk-theme-anim main,
+  html.jk-theme-anim footer,
+  html.jk-theme-anim section {
+    transition: none;
+  }
+}
