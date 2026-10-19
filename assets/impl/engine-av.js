@@ -309,7 +309,7 @@
             <div class="ic">${window.icon(cfg.icon || 'video', 30)}</div>
             <h3>${cfg.dropTitle || '选择文件'}</h3>
             <p>拖放文件到这里，或粘贴、点击选择</p>
-            <button class="btn-lime" id="avPick">${window.icon('video', 16)} ${cfg.pickLabel || '选择文件'} <span>→</span></button>
+            <button class="btn-lime" id="avPick">${window.icon('video', 16)} ${cfg.pickLabel || '选择文件'} <span><svg data-lucide="arrow-right" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></button>
             <div class="fmts">${cfg.formats || '<b>MP4、MOV、WebM、MKV</b> · 最大 <b>4 GB</b>'}</div>
           </div>
           <input type="file" id="avFile" hidden ${multiple ? 'multiple' : ''} accept="${accept}">

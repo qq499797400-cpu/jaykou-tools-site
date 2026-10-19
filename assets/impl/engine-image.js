@@ -145,7 +145,7 @@
         push(`<div class="ptitle">调整尺寸</div><div class="pdesc">设置新尺寸。锁定比例可避免拉伸。</div>
           <div class="fieldrow"><div class="fld"><div class="plabel" style="margin-top:0">宽</div><input type="number" id="imgW"></div>
           <div class="fld"><div class="plabel" style="margin-top:0">高</div><input type="number" id="imgH"></div></div>
-          <div class="chk on" id="imgLock"><span class="box">✓</span> 保持宽高比</div>
+          <div class="chk on" id="imgLock"><span class="box"><svg data-lucide="check" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span> 保持宽高比</div>
           <div class="plabel">预设</div><div class="shapes" id="imgPresets">${(cfg.presets || [[1920, 1080], [1280, 720], [1080, 1080], [1080, 1350], [800, 800]]).map(p => `<button class="shape" data-w="${p[0]}" data-h="${p[1]}">${p[0]}×${p[1]}</button>`).join('')}</div>`);
         break;
       case 'rotate':
@@ -194,12 +194,12 @@
         break;
       case 'ico':
         push(`<div class="ptitle">图标尺寸</div><div class="pdesc">单个 .ico 内含多种尺寸，可直接用作 favicon。</div>
-          <div class="chk on" data-sz="16"><span class="box">✓</span> 16 × 16</div>
-          <div class="chk on" data-sz="32"><span class="box">✓</span> 32 × 32</div>
-          <div class="chk on" data-sz="48"><span class="box">✓</span> 48 × 48</div>
-          <div class="chk on" data-sz="64"><span class="box">✓</span> 64 × 64</div>
-          <div class="chk on" data-sz="128"><span class="box">✓</span> 128 × 128</div>
-          <div class="chk" data-sz="256"><span class="box">✓</span> 256 × 256</div>`);
+          <div class="chk on" data-sz="16"><span class="box"><svg data-lucide="check" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span> 16 × 16</div>
+          <div class="chk on" data-sz="32"><span class="box"><svg data-lucide="check" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span> 32 × 32</div>
+          <div class="chk on" data-sz="48"><span class="box"><svg data-lucide="check" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span> 48 × 48</div>
+          <div class="chk on" data-sz="64"><span class="box"><svg data-lucide="check" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span> 64 × 64</div>
+          <div class="chk on" data-sz="128"><span class="box"><svg data-lucide="check" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span> 128 × 128</div>
+          <div class="chk" data-sz="256"><span class="box"><svg data-lucide="check" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span> 256 × 256</div>`);
         break;
       case 'collage':
         push(`<div class="ptitle">布局</div><div class="pdesc">添加两张及以上图片，将排列成网格。</div>
@@ -212,7 +212,7 @@
         push(`<div class="ptitle">圆形头像</div><div class="pdesc">裁剪为正方形并切出圆形。</div>
           <div class="plabel" style="margin-top:0">尺寸</div><select id="avSize"><option value="512">512 px</option><option value="400">400 px</option><option value="256">256 px</option><option value="128">128 px</option></select>
           <div class="plabel">背景</div><input type="text" id="avBg" value="#ffffff">
-          <div class="chk on" id="avRing"><span class="box">✓</span> 添加细边框</div>`);
+          <div class="chk on" id="avRing"><span class="box"><svg data-lucide="check" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span> 添加细边框</div>`);
         break;
       case 'photo':
         push(`<div class="ptitle">证件照设置</div><div class="pdesc">${cfg.paneDesc || '排版并导出可直接打印的证件照。'}</div>
@@ -225,7 +225,7 @@
           <div class="fieldrow"><div class="fld"><div class="plabel" style="margin-top:0">宽度</div><input type="number" id="bk.W" value="${cfg.w || 1080}"></div>
           <div class="fld"><div class="plabel" style="margin-top:0">高度</div><input type="number" id="bkH" value="${cfg.h || 1080}"></div></div>
           <div class="plabel">背景</div><input type="text" id="bkBg" value="${cfg.bg || '#ffffff'}">
-          <div class="chk" id="bkTrans"><span class="box">✓</span> 透明背景</div>`);
+          <div class="chk" id="bkTrans"><span class="box"><svg data-lucide="check" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span> 透明背景</div>`);
         break;
       default:
         push(`<div class="ptitle">${cfg.paneTitle || '图片处理'}</div><div class="pdesc">${cfg.paneDesc || '在本地处理图片。'}</div>`);
@@ -248,7 +248,7 @@
             <div class="ic">${window.icon('image', 30)}</div>
             <h3>${cfg.dropTitle || '选择一张图片'}</h3>
             <p>拖放图片到此处、直接粘贴，或点击选择</p>
-            <button class="btn-lime" id="imgPick">${window.icon('image', 16)} ${cfg.pickLabel || '选择图片'} <span>→</span></button>
+            <button class="btn-lime" id="imgPick">${window.icon('image', 16)} ${cfg.pickLabel || '选择图片'} <span><svg data-lucide="arrow-right" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></button>
             <div class="fmts">${cfg.formats || '<b>JPG、PNG、WebP、AVIF、BMP、GIF、SVG</b> · 最大 <b>50 MB</b>'}</div>
           </div>
           <input type="file" id="imgFile" accept="image/*,.heic,.avif" hidden ${multi ? 'multiple' : ''}>

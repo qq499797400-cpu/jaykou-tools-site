@@ -347,8 +347,8 @@
         push(`<div class="ptitle">转换</div><div class="pdesc">数据格式互转，在页面内完成。</div>
           <div class="plabel" style="margin-top:0">来源格式</div><select id="txFrom">${['json', 'csv', 'tsv', 'yaml', 'xml', 'toml', 'markdown', 'html'].map(f => `<option ${cfg.from === f ? 'selected' : ''}>${f}</option>`).join('')}</select>
           <div class="plabel">目标格式</div><select id="txTo">${['json', 'csv', 'tsv', 'yaml', 'xml', 'toml', 'markdown', 'html'].map(f => `<option ${cfg.to === f ? 'selected' : ''}>${f}</option>`).join('')}</select>
-          <div class="chk on" id="txPretty"><span class="box">✓</span> 美化输出</div>
-          <div class="chk" id="txRoot"><span class="box">✓</span> 用根节点包裹 XML 行</div>`);
+          <div class="chk on" id="txPretty"><span class="box"><svg data-lucide="check" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span> 美化输出</div>
+          <div class="chk" id="txRoot"><span class="box"><svg data-lucide="check" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span> 用根节点包裹 XML 行</div>`);
         break;
       case 'encode':
         push(`<div class="ptitle">编码</div><div class="pdesc">选择编码方案，然后编码或解码。</div>
@@ -359,7 +359,7 @@
         push(`<div class="ptitle">哈希</div><div class="pdesc">校验和在本地计算，数据不会离开页面。</div>
           <div class="plabel" style="margin-top:0">算法</div><select id="txAlgo"><option>sha256</option><option>sha1</option><option>sha512</option><option>md5</option><option>hmac-sha256</option></select>
           <div class="plabel">密钥（仅 HMAC）</div><input type="text" id="txKey" placeholder="可选">
-          <div class="chk" id="txUpper"><span class="box">✓</span> 输出大写</div>`);
+          <div class="chk" id="txUpper"><span class="box"><svg data-lucide="check" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span> 输出大写</div>`);
         break;
       case 'case':
         push(`<div class="ptitle">大小写</div><div class="pdesc">选择一种风格，文本即时更新。</div>
@@ -367,8 +367,8 @@
         break;
       case 'diff':
         push(`<div class="ptitle">文本对比</div><div class="pdesc">逐行对比，新增为绿色，删除为红色。</div>
-          <div class="chk on" id="txIgnoreCase"><span class="box">✓</span> 忽略大小写</div>
-          <div class="chk on" id="txIgnoreWs"><span class="box">✓</span> 忽略空白</div>`);
+          <div class="chk on" id="txIgnoreCase"><span class="box"><svg data-lucide="check" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span> 忽略大小写</div>
+          <div class="chk on" id="txIgnoreWs"><span class="box"><svg data-lucide="check" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span> 忽略空白</div>`);
         break;
       case 'regex':
         push(`<div class="ptitle">正则</div><div class="pdesc">用正则表达式测试你的文本。</div>
@@ -381,7 +381,7 @@
         push(`<div class="ptitle">JSON</div><div class="pdesc">校验、格式化或压缩。</div>
           <div class="seg"><button id="jsFmt" class="on">格式化</button><button id="jsMin">压缩</button><button id="jsTree">树形</button></div>
           <div class="plabel">缩进</div><select id="jsIndent"><option value="2">2 空格</option><option value="4">4 空格</option><option value="\t">Tab</option></select>
-          <div class="plabel">排序键</div><div class="chk" id="jsSort"><span class="box">✓</span> 按字母序</div>
+          <div class="plabel">排序键</div><div class="chk" id="jsSort"><span class="box"><svg data-lucide="check" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span> 按字母序</div>
           <div class="outbox" id="jsInfo">—</div>`);
         break;
       case 'jwt':

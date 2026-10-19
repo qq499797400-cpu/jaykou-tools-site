@@ -764,7 +764,7 @@
       return '<option value="' + esc(p.v) + '"' + (String(p.v) === String(val) ? ' selected' : '') + '>' + esc(p.t) + '</option>';
     }).join('') + '</select>';
   }
-  function chkk(k, label, on) { return '<div class="chk' + (on ? ' on' : '') + '" id="' + k + '" data-k="' + k + '"><span class="box">✓</span>' + esc(label) + '</div>'; }
+  function chkk(k, label, on) { return '<div class="chk' + (on ? ' on' : '') + '" id="' + k + '" data-k="' + k + '"><span class="box"><svg data-lucide="check" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>' + esc(label) + '</div>'; }
   function colk(k, label, val) { return '<div class="plabel">' + esc(label) + '</div><input type="text" id="' + k + '" data-k="' + k + '" value="' + esc(val) + '" placeholder="#00ff00">'; }
   function numk(k, label, val) { return '<div class="plabel">' + esc(label) + '</div><input type="number" id="' + k + '" data-k="' + k + '" value="' + esc(val) + '">'; }
   function pills(k, label, opts, val, multi) {
@@ -812,7 +812,7 @@
 
     stage.innerHTML =
       T.drop(spec.dropInner || ('<div class="ic">' + window.icon('image', 30) + '</div><h3>' + esc(spec.dropTitle || '选择一张图片') + '</h3><p>拖到这里、粘贴，或点击浏览</p>' +
-        '<button class="btn-lime" type="button">' + window.icon('image', 16) + ' 选择图片 <span>→</span></button>'), spec.accept || 'image/*', false) +
+        '<button class="btn-lime" type="button">' + window.icon('image', 16) + ' 选择图片 <span><svg data-lucide="arrow-right" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></button>'), spec.accept || 'image/*', false) +
       '<div id="aiLoaded" class="hide" style="flex:1;display:flex;flex-direction:column"></div>';
 
     pane.innerHTML =
@@ -1013,7 +1013,7 @@
 
     stage.innerHTML =
       T.drop(spec.dropInner || ('<div class="ic">' + window.icon(spec.kind === 'audio' ? 'audio' : 'video', 30) + '</div><h3>' + esc(spec.dropTitle || '选择文件') + '</h3><p>拖到这里，或点击浏览</p>' +
-        '<button class="btn-lime" type="button">' + window.icon(spec.kind === 'audio' ? 'audio' : 'video', 16) + ' 选择文件 <span>→</span></button>'), spec.accept, false) +
+        '<button class="btn-lime" type="button">' + window.icon(spec.kind === 'audio' ? 'audio' : 'video', 16) + ' 选择文件 <span><svg data-lucide="arrow-right" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></button>'), spec.accept, false) +
       '<div id="avLoaded" class="hide" style="flex:1;display:flex;flex-direction:column"></div>';
 
     pane.innerHTML =
@@ -3059,7 +3059,7 @@
       const stage = shell.stage, pane = shell.pane;
       const S = { file: null, ctxAC: null, buf: null, res: null };
       stage.innerHTML = T.drop('<div class="ic">' + window.icon('audio', 30) + '</div><h3>选择一首歌或一段音频</h3><p>支持 mp3 / wav / m4a / flac / ogg，也支持视频里的音轨</p>' +
-        '<button class="btn-lime" type="button">' + window.icon('audio', 16) + ' 选择文件 <span>→</span></button>', 'audio/*,video/*', false) +
+        '<button class="btn-lime" type="button">' + window.icon('audio', 16) + ' 选择文件 <span><svg data-lucide="arrow-right" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></button>', 'audio/*,video/*', false) +
         '<div id="apLoaded" class="hide" style="flex:1;display:flex;flex-direction:column"></div>';
       pane.innerHTML = '<div class="ptitle">' + esc(title) + '</div>' +
         '<div class="pdesc">用 Web Audio 做真实的音频测量：BPM（起音包络自相关）、频谱质心、动态范围、立体声相关性、削波比例、频段能量分布、频谱平坦度。</div>' +

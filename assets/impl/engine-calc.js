@@ -519,7 +519,7 @@
     if (sp.mode === 'random') {
       const kinds = {
         number: `<div class="fieldrow" style="gap:10px"><div class="fld"><div class="plabel">最小值</div><input type="number" id="rMin" value="1"></div><div class="fld"><div class="plabel">最大值</div><input type="number" id="rMax" value="100"></div><div class="fld"><div class="plabel">数量</div><input type="number" id="rN" value="1"></div></div>
-          <div class="chk" id="rUniq"><span class="box">✓</span> 不允许重复</div>`,
+          <div class="chk" id="rUniq"><span class="box"><svg data-lucide="check" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span> 不允许重复</div>`,
         dice: `<div class="plabel">骰子</div><select id="dSides"><option value="6">d6</option><option value="4">d4</option><option value="8">d8</option><option value="10">d10</option><option value="12">d12</option><option value="20">d20</option><option value="100">d100</option></select>
           <div class="plabel">数量</div><input type="number" id="dN" value="2">`,
         coin: `<div class="plabel">硬币数量</div><input type="number" id="cN" value="1">`,
@@ -604,7 +604,7 @@
             <div class="shapes" id="tPresets" style="margin-bottom:6px">${[1, 3, 5, 10, 15, 25, 45, 60].map(m => `<button class="shape" data-m="${m}">${m} 分钟</button>`).join('')}</div>
             <button class="btn-lime btn-run" id="tStart">开始</button>
             <button class="btn-ghost btn-sm" id="tReset" style="width:100%;justify-content:center;margin-top:10px">重置</button>
-            <div class="chk on" id="tBeep"><span class="box">✓</span> 结束时响铃</div>
+            <div class="chk on" id="tBeep"><span class="box"><svg data-lucide="check" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span> 结束时响铃</div>
           </div>
         </div>`;
       let remain = start, running = false, raf = null, last = 0;

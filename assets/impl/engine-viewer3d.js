@@ -2444,7 +2444,7 @@
       '<div class="ic">' + window.icon('cube', 30) + '</div>' +
       '<h3>' + esc(cfg.dropTitle || ('拖入 ' + spec.exts.map(e => e.toUpperCase()).join(' / ') + ' 文件')) + '</h3>' +
       '<p>拖拽文件到这里，或点击选择 · 全程本地解析</p>' +
-      '<button class="btn-lime" id="vPick">' + window.icon('cube', 16) + ' 选择文件 <span>→</span></button>' +
+      '<button class="btn-lime" id="vPick">' + window.icon('cube', 16) + ' 选择文件 <span><svg data-lucide="arrow-right" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></button>' +
       '<div class="fmts">' + spec.exts.map(e => '<b>' + e.toUpperCase() + '</b>').join(' / ') + ' · 支持拖拽与粘贴</div>' +
       '<input type="file" id="vFile" accept="' + spec.accept + '" hidden>' +
       '</div>' +
@@ -2645,7 +2645,7 @@
       '<div class="ic">' + window.icon('cube', 30) + '</div>' +
       '<h3>' + esc(spec.title) + '</h3>' +
       '<p>拖拽 .' + spec.from + ' 文件，立即在本地转换成 .' + spec.to + '</p>' +
-      '<button class="btn-lime" id="cPick">选择文件 <span>→</span></button>' +
+      '<button class="btn-lime" id="cPick">选择文件 <span><svg data-lucide="arrow-right" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></button>' +
       '<div class="fmts"><b>' + spec.from.toUpperCase() + '</b> · 全部本地处理，不上传</div>' +
       '<input type="file" id="cFile" accept="' + spec.accept + '" hidden>' +
       '</div>' +
@@ -2775,7 +2775,7 @@
       '<div class="drop" id="dDrop" style="flex:1">' +
       '<div class="ic">' + window.icon('cube', 30) + '</div><h3>拖入 DXF 图纸</h3>' +
       '<p>LINE / CIRCLE / ARC / LWPOLYLINE / POLYLINE / TEXT / ELLIPSE / SPLINE（控制点）/ INSERT（展开一层）</p>' +
-      '<button class="btn-lime" id="dPick">选择 DXF 文件 <span>→</span></button>' +
+      '<button class="btn-lime" id="dPick">选择 DXF 文件 <span><svg data-lucide="arrow-right" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></button>' +
       '<div class="fmts"><b>DXF</b> · 正交相机俯视 · 滚轮缩放 / 拖拽平移</div>' +
       '<input type="file" id="dFile" accept=".dxf" hidden></div>' +
       '<div id="dWrap" class="hide" style="position:relative;flex:1;min-height:480px;border:1px solid #2a2a2a;border-radius:14px;overflow:hidden;background:#0d0d0d">' +
@@ -3058,7 +3058,7 @@
       '<div class="drop" id="gDrop" style="flex:1">' +
       '<div class="ic">' + window.icon('cube', 30) + '</div><h3>拖入 Gerber（RS-274X）文件</h3>' +
       '<p>' + (isPcb ? '可一次拖入顶层 / 底层 / 阻焊等多层，叠加观察 PCB。' : '支持多文件叠加，不同层用不同颜色。') + '</p>' +
-      '<button class="btn-lime" id="gPick">选择文件（可多选） <span>→</span></button>' +
+      '<button class="btn-lime" id="gPick">选择文件（可多选） <span><svg data-lucide="arrow-right" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></button>' +
       '<div class="fmts"><b>.gbr .ger .gtl .gbl .gts .gbs .gto .gko .pho</b> · 本地解析</div>' +
       '<input type="file" id="gFile" accept=".gbr,.ger,.gtl,.gbl,.gts,.gbs,.gto,.gbo,.gko,.pho,.art,.txt" multiple hidden></div>' +
       '<div id="gWrap" class="hide" style="position:relative;flex:1;min-height:480px;border:1px solid #2a2a2a;border-radius:14px;overflow:hidden;background:#060606">' +
@@ -3196,7 +3196,7 @@
     stage.innerHTML =
       '<div class="drop" id="sDrop" style="flex:1"><div class="ic">' + window.icon('cube', 30) + '</div>' +
       '<h3>拖入 Gerber 文件</h3><p>解析后生成矢量 SVG（可缩放、可导入矢量软件）</p>' +
-      '<button class="btn-lime" id="sPick">选择文件（可多选） <span>→</span></button>' +
+      '<button class="btn-lime" id="sPick">选择文件（可多选） <span><svg data-lucide="arrow-right" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></button>' +
       '<div class="fmts"><b>RS-274X</b> · 本地转换</div>' +
       '<input type="file" id="sFile" accept=".gbr,.ger,.gtl,.gbl,.gts,.gbs,.gto,.gko,.pho" multiple hidden></div>' +
       '<div id="sWrap" class="hide" style="flex:1;display:flex;flex-direction:column;gap:10px">' +
@@ -3264,7 +3264,7 @@
     stage.innerHTML =
       '<div class="drop" id="eDrop" style="flex:1"><div class="ic">' + window.icon('cube', 30) + '</div>' +
       '<h3>拖入 Excellon 钻孔文件</h3><p>解析 INCH/METRIC、T01C0.035 刀具、X/Y 坐标、G85 槽孔</p>' +
-      '<button class="btn-lime" id="ePick">选择文件 <span>→</span></button>' +
+      '<button class="btn-lime" id="ePick">选择文件 <span><svg data-lucide="arrow-right" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></button>' +
       '<div class="fmts"><b>.drl .txt .xln .exc</b> · 本地解析</div>' +
       '<input type="file" id="eFile" accept=".drl,.txt,.xln,.exc,.ncd" hidden></div>' +
       '<div id="eWrap" class="hide" style="position:relative;flex:1;min-height:460px;border:1px solid #2a2a2a;border-radius:14px;overflow:hidden;background:#060606">' +
@@ -3419,7 +3419,7 @@
       '<div class="ic">' + window.icon('cube', 30) + '</div>' +
       '<h3>拖入 ' + (isPdb ? 'PDB' : '分子') + '文件</h3>' +
       '<p>ATOM / HETATM 记录 · CPK 配色 · 球棍 / 空间填充 / 线框</p>' +
-      '<button class="btn-lime" id="mPick">选择文件 <span>→</span></button>' +
+      '<button class="btn-lime" id="mPick">选择文件 <span><svg data-lucide="arrow-right" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></button>' +
       '<div class="fmts"><b>.pdb .ent</b> · 也可以直接粘贴 PDB 文本</div>' +
       '<input type="file" id="mFile" accept=".pdb,.ent,.txt" hidden>' +
       '<div class="plabel" style="margin-top:16px;align-self:stretch;text-align:left">或粘贴 PDB 文本</div>' +
@@ -3576,7 +3576,7 @@
       '<div class="drop" id="iDrop" style="flex:1"><div class="ic">' + window.icon('image', 30) + '</div>' +
       '<h3>' + (isLitho ? '拖入照片做石板画' : '拖入图片生成浮雕 STL') + '</h3>' +
       '<p>' + (isLitho ? '按透光度反推厚度，输出可直接打印的 STL' : '灰度 → 位移网格，输出可打印的 STL') + '</p>' +
-      '<button class="btn-lime" id="iPick">选择图片 <span>→</span></button>' +
+      '<button class="btn-lime" id="iPick">选择图片 <span><svg data-lucide="arrow-right" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></button>' +
       '<div class="fmts"><b>PNG · JPG · WebP</b> · 本地生成</div>' +
       '<input type="file" id="iFile" accept="image/*" hidden></div>' +
       '<div id="iWrap" class="hide" style="flex:1;display:flex;flex-direction:column;gap:10px">' +
@@ -3738,7 +3738,7 @@
     stage.innerHTML =
       '<div class="drop" id="xDrop" style="flex:1"><div class="ic">' + window.icon('image', 30) + '</div>' +
       '<h3>拖入图片 → 轮廓 DXF</h3><p>Sobel 边缘检测 + Moore 邻域轮廓追踪 + Douglas-Peucker 简化</p>' +
-      '<button class="btn-lime" id="xPick">选择图片 <span>→</span></button>' +
+      '<button class="btn-lime" id="xPick">选择图片 <span><svg data-lucide="arrow-right" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></button>' +
       '<div class="fmts"><b>PNG · JPG · WebP</b> · 输出 <b>DXF</b>（LWPOLYLINE）</div>' +
       '<input type="file" id="xFile" accept="image/*" hidden></div>' +
       '<div id="xWrap" class="hide" style="flex:1;display:flex;flex-direction:column;gap:10px">' +
@@ -3901,7 +3901,7 @@
     stage.innerHTML =
       '<div class="drop" id="vDrop" style="flex:1"><div class="ic">' + window.icon('image', 30) + '</div>' +
       '<h3>拖入 SVG 或粘贴源码</h3><p>path（M/L/H/V/C/S/Q/T/A/Z）/ line / rect / circle / ellipse / polyline / polygon</p>' +
-      '<button class="btn-lime" id="vPick">选择 SVG 文件 <span>→</span></button>' +
+      '<button class="btn-lime" id="vPick">选择 SVG 文件 <span><svg data-lucide="arrow-right" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></button>' +
       '<div class="fmts"><b>SVG</b> → <b>DXF</b> · 本地转换</div>' +
       '<input type="file" id="vFile" accept=".svg" hidden>' +
       '<textarea id="vPaste" rows="3" placeholder="&lt;svg ...&gt; ... &lt;/svg&gt;" style="align-self:stretch;width:100%;margin-top:14px"></textarea>' +
@@ -3953,7 +3953,7 @@
     stage.innerHTML =
       '<div class="drop" id="wDrop" style="flex:1"><div class="ic">' + window.icon('cube', 30) + '</div>' +
       '<h3>拖入 DXF → SVG</h3><p>LINE / CIRCLE / ARC / LWPOLYLINE / TEXT，viewBox 自动适配</p>' +
-      '<button class="btn-lime" id="wPick">选择 DXF 文件 <span>→</span></button>' +
+      '<button class="btn-lime" id="wPick">选择 DXF 文件 <span><svg data-lucide="arrow-right" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></button>' +
       '<div class="fmts"><b>DXF</b> → <b>SVG</b> · 本地转换</div>' +
       '<input type="file" id="wFile" accept=".dxf" hidden></div>' +
       '<div id="wWrap" class="hide" style="flex:1;display:flex;flex-direction:column;gap:10px">' +
@@ -4002,7 +4002,7 @@
     stage.innerHTML =
       '<div class="drop" id="pDrop" style="flex:1"><div class="ic">' + window.icon('image', 30) + '</div>' +
       '<h3>拖入一张图片做视差 3D</h3><p>鼠标 / 触摸 / 陀螺仪控制视角倾斜，可导出 PNG</p>' +
-      '<button class="btn-lime" id="pPick">选择图片 <span>→</span></button>' +
+      '<button class="btn-lime" id="pPick">选择图片 <span><svg data-lucide="arrow-right" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></button>' +
       '<div class="fmts"><b>PNG · JPG · WebP</b> · 本地处理</div>' +
       '<input type="file" id="pFile" accept="image/*" hidden></div>' +
       '<div id="pWrap" class="hide" style="flex-direction:column;gap:10px;flex:1">' +
@@ -4143,7 +4143,7 @@
     stage.innerHTML =
       '<div class="drop" id="qDrop" style="flex:1"><div class="ic">' + window.icon('cube', 30) + '</div>' +
       '<h3>拖入 STEP（.step / .stp）</h3><p>尽力解析 CARTESIAN_POINT / POLY_LOOP / ADVANCED_FACE / CLOSED_SHELL</p>' +
-      '<button class="btn-lime" id="qPick">选择文件 <span>→</span></button>' +
+      '<button class="btn-lime" id="qPick">选择文件 <span><svg data-lucide="arrow-right" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></button>' +
       '<div class="fmts"><b>ISO-10303-21</b> · 浏览器端简化解析（无 CAD 内核）</div>' +
       '<input type="file" id="qFile" accept=".step,.stp" hidden></div>' +
       '<div id="qWrap" class="hide" style="position:relative;flex:1;min-height:460px;border:1px solid #2a2a2a;border-radius:14px;overflow:hidden;background:#101010">' +

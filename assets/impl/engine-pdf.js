@@ -2195,9 +2195,9 @@
   }
   function pageViewer(stage, o) {
     stage.innerHTML = `<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px">
-        <button class="btn-ghost btn-sm" id="pvPrev">← 上一页</button>
+        <button class="btn-ghost btn-sm" id="pvPrev">上一页</button>
         <span class="mini" id="pvLabel">—</span>
-        <button class="btn-ghost btn-sm" id="pvNext">下一页 →</button>
+        <button class="btn-ghost btn-sm" id="pvNext">下一页</button>
         <button class="btn-ghost btn-sm" id="pvClear">清除本页标记</button>
         <span class="mini" id="pvHint"></span>
       </div>
@@ -2401,7 +2401,7 @@
           </div>
           <div style="display:flex;justify-content:space-between;margin-top:6px;gap:4px">
             <button class="btn-ghost btn-sm" data-rot="${i}" title="旋转">↻</button>
-            <button class="btn-ghost btn-sm" data-del="${i}" title="删除">✕</button>
+            <button class="btn-ghost btn-sm" data-del="${i}" title="删除"><svg data-lucide="x" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
           </div></div>`).join('') + '</div>';
       pane.querySelector('#edInfo').innerHTML = `共 <b>${S.items.length}</b> 页 · 选中 <b>${S.sel.size}</b> 页`;
       const imgWrap = wrap;
@@ -2872,9 +2872,9 @@
     stage.innerHTML = window.TUI.drop(dropInner({ title: '选择 PDF', hint: '拖入或点击选择；随后可预览与导出', icon: 'pdf' }), '.pdf,application/pdf', false) +
       `<div id="rzWrap" class="hide" style="margin-top:12px">
         <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
-          <button class="btn-ghost btn-sm" id="rzPrev">←</button>
+          <button class="btn-ghost btn-sm" id="rzPrev"><svg data-lucide="chevron-left" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
           <span class="mini" id="rzLabel">—</span>
-          <button class="btn-ghost btn-sm" id="rzNext">→</button>
+          <button class="btn-ghost btn-sm" id="rzNext"><svg data-lucide="chevron-right" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
         </div>
         <div class="canvaswrap" style="text-align:center"><canvas id="rzCanvas" style="max-width:100%;max-height:460px;background:#fff;border-radius:8px"></canvas></div>
       </div>`;
@@ -2961,8 +2961,8 @@
         <div>${window.TUI.field('页码', window.TUI.input('rdPage', '1', '1', 'number'))}</div>
         <div>${window.TUI.field('缩放', window.TUI.input('rdZoom', '1.2', '1.2', 'number'))}</div></div>
        <div class="shapes" style="margin-top:4px">
-         <button class="btn-ghost btn-sm" id="rdPrev">← 上一页</button>
-         <button class="btn-ghost btn-sm" id="rdNext">下一页 →</button>
+         <button class="btn-ghost btn-sm" id="rdPrev">上一页</button>
+         <button class="btn-ghost btn-sm" id="rdNext">下一页</button>
          <button class="btn-ghost btn-sm" id="rdFit">适应宽度</button></div>
        <div class="outbox" id="rdInfo">尚未载入 PDF</div>
        <div class="warnbox">渲染为本地近似实现（pdfjs 在本环境缺少 worker 不可用）；文字与常见图形正确，复杂效果可能有差异。</div>`;
@@ -3819,9 +3819,9 @@ ${names.map((nm, i) => `<h2>第 ${i + 1} 页</h2><img src="${nm}" alt="page ${i 
         <canvas id="gvCanvas" style="background:#fff;box-shadow:0 4px 24px #000a;max-width:100%"></canvas>
       </div>
       <div class="shapes" style="margin-top:10px">
-        <button class="btn-ghost btn-sm" id="gvPrev">← 上一页</button>
+        <button class="btn-ghost btn-sm" id="gvPrev">上一页</button>
         <span class="mini" id="gvLabel">—</span>
-        <button class="btn-ghost btn-sm" id="gvNext">下一页 →</button>
+        <button class="btn-ghost btn-sm" id="gvNext">下一页</button>
         <button class="btn-ghost btn-sm" id="gvRefresh">刷新预览</button>
       </div>`;
     pane.innerHTML = window.TUI.head(spec.title, spec.desc) + spec.fields.map(fieldHtml).join('') +
@@ -3836,7 +3836,7 @@ ${names.map((nm, i) => `<h2>第 ${i + 1} 页</h2><img src="${nm}" alt="page ${i 
       if (!box) return;
       box.innerHTML = model.items.map((it, i) => `<div style="display:flex;gap:6px;align-items:flex-end;margin-bottom:6px">
         ${itemCols.map(c => `<div style="flex:${c.width || 1}"><div class="mini" style="font-size:10px">${esc(c.label)}</div><input data-i="${i}" data-k="${c.id}" type="${c.type || 'text'}" value="${esc(it[c.id])}" style="width:100%"></div>`).join('')}
-        <button class="btn-ghost btn-sm" data-rm="${i}" title="删除">✕</button></div>`).join('');
+        <button class="btn-ghost btn-sm" data-rm="${i}" title="删除"><svg data-lucide="x" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>`).join('');
       box.querySelectorAll('input[data-i]').forEach(inp => inp.addEventListener('input', () => { model.items[+inp.dataset.i][inp.dataset.k] = inp.value; }));
       box.querySelectorAll('[data-rm]').forEach(b => b.addEventListener('click', () => { model.items.splice(+b.dataset.rm, 1); renderItems(); }));
     }

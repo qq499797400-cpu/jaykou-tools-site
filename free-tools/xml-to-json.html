@@ -26,8 +26,8 @@
         <div class="pane" id="txPane"><div class="ptitle">转换</div><div class="pdesc">数据格式互转，在页面内完成。</div>
           <div class="plabel" style="margin-top:0">来源格式</div><select id="txFrom"><option>json</option><option>csv</option><option>tsv</option><option>yaml</option><option selected="">xml</option><option>toml</option><option>markdown</option><option>html</option></select>
           <div class="plabel">目标格式</div><select id="txTo"><option selected="">json</option><option>csv</option><option>tsv</option><option>yaml</option><option>xml</option><option>toml</option><option>markdown</option><option>html</option></select>
-          <div class="chk on" id="txPretty"><span class="box">✓</span> 美化输出</div>
-          <div class="chk" id="txRoot"><span class="box">✓</span> 用根节点包裹 XML 行</div><button class="btn-lime btn-run" id="txGo">转换</button>
+          <div class="chk on" id="txPretty"><span class="box"><svg data-lucide="check" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span> 美化输出</div>
+          <div class="chk" id="txRoot"><span class="box"><svg data-lucide="check" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span> 用根节点包裹 XML 行</div><button class="btn-lime btn-run" id="txGo">转换</button>
       <button class="btn-ghost btn-sm" id="txCopy" style="width:100%;justify-content:center;margin-top:10px">复制输出</button>
       <button class="btn-ghost btn-sm" id="txDl" style="width:100%;justify-content:center;margin-top:8px">下载</button>
       <div class="runnote">所有操作均在浏览器内完成，不会向任何地方发送数据。</div></div>

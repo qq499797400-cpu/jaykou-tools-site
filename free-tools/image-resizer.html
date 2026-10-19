@@ -14,7 +14,7 @@
             <div class="ic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"></rect><circle cx="9" cy="9" r="2"></circle><path d="M21 15l-5-5L5 21"></path></svg></div>
             <h3>选择一张图片</h3>
             <p>拖放图片到此处、直接粘贴，或点击选择</p>
-            <button class="btn-lime" id="imgPick"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"></rect><circle cx="9" cy="9" r="2"></circle><path d="M21 15l-5-5L5 21"></path></svg> 选择图片 <span>→</span></button>
+            <button class="btn-lime" id="imgPick"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"></rect><circle cx="9" cy="9" r="2"></circle><path d="M21 15l-5-5L5 21"></path></svg> 选择图片 <span><svg data-lucide="arrow-right" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></button>
             <div class="fmts"><b>JPG、PNG、WebP、AVIF、BMP、GIF、SVG</b> · 最大 <b>50 MB</b></div>
           </div>
           <input type="file" id="imgFile" accept="image/*" hidden="">
@@ -32,7 +32,7 @@
         <div class="pane" id="imgPane"><div class="ptitle">调整尺寸</div><div class="pdesc">设置新尺寸。锁定比例可避免拉伸。</div>
           <div class="fieldrow"><div class="fld"><div class="plabel" style="margin-top:0">宽</div><input type="number" id="imgW"></div>
           <div class="fld"><div class="plabel" style="margin-top:0">高</div><input type="number" id="imgH"></div></div>
-          <div class="chk on" id="imgLock"><span class="box">✓</span> 保持宽高比</div>
+          <div class="chk on" id="imgLock"><span class="box"><svg data-lucide="check" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span> 保持宽高比</div>
           <div class="plabel">预设</div><div class="shapes" id="imgPresets"><button class="shape" data-w="1920" data-h="1080">1920×1080</button><button class="shape" data-w="1280" data-h="720">1280×720</button><button class="shape" data-w="1080" data-h="1080">1080×1080</button><button class="shape" data-w="1080" data-h="1350">1080×1350</button><button class="shape" data-w="800" data-h="800">800×800</button></div><div class="outbox" id="imgOut">输出：—</div>
       <button class="btn-lime btn-run" id="imgGo">下载</button>
       <div class="warnbox hide" id="imgWarn"></div>
