@@ -28,3 +28,10 @@ $RECYCLE.BIN/
 node_modules/
 .env
 .env.local
+
+# 构建中间产物：站点不引用，留着只是白占仓库体积
+assets/clone.css
+assets/main.css.bak
+assets/main.css.origbak
+*.bak
+*.origbak
