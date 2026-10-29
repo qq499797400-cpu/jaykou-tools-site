@@ -272,7 +272,8 @@
 
     function metaTxt() { return `${S.img.naturalWidth} × ${S.img.naturalHeight}`; }
 
-    async function load(files) {
+    async function load(input) {
+      const files = input instanceof File ? [input] : Array.from(input || []);
       const f = files[0]; if (!f) return;
       if (!/^image\//.test(f.type) && !/\.(png|jpe?g|webp|avif|bmp|gif|svg)$/i.test(f.name)) { window.toast('That is not an image'); return; }
       try { S.img = await loadImg(f); } catch (e) { window.toast(e.message); return; }

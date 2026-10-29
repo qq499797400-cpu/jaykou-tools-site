@@ -340,7 +340,8 @@
     const hideProg = () => { $('#avProg').style.display = 'none'; };
 
     /* ---- 文件加载 ---- */
-    async function load(files) {
+    async function load(input) {
+      const files = input instanceof File ? [input] : Array.from(input || []);
       const f = files[0];
       if (!f) return;
       S.file = f;
