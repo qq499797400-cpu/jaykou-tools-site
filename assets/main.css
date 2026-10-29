@@ -32,3 +32,11 @@ html.dark .pane .seg button.on,html.dark .pane .chk.on{background:#7c5cff!import
 html.dark .jk-cost{background:#242424!important;color:#c7c7d1!important;border-color:#3a3a3a!important}
 html.dark .jk-cost b{color:#a99bff!important}
 html.dark .jk-bar{background:#262626!important;color:#e5e5e5!important}
+/* 深色下渐变裁剪文字（background-clip:text）会发暗，统一改纯白 */
+html.dark h1,html.dark h2,html.dark h3{background-image:none!important;-webkit-text-fill-color:#f5f5f5!important;color:#f5f5f5!important}
+html.dark .pane input[type=range]{background:transparent!important}
+html.dark .pane input[type=range]::-webkit-slider-runnable-track{background:#3a3a3a!important;border-radius:999px}
+html.dark .pane input[type=range]::-webkit-slider-thumb{background:#7c5cff!important}
+/* 深色下正文/面板文字提亮 */
+html.dark .vectorizer_hero__NTpYy p{color:#b9b9c4!important}
+html.dark .pane p,html.dark .pane span,html.dark .pane label,html.dark .pane div,html.dark .pane strong,html.dark .pane small,html.dark .pane b{color:#e5e5e5!important}
